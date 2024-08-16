@@ -13,7 +13,8 @@ data class RedditChildren(
 )
 
 data class RedditPostData(
-    val author: String,
+    val subreddit_name_prefixed: String,
+    val title: String,
     val created_utc: Long,
     val url: String?,
     val num_comments: Int

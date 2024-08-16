@@ -1,7 +1,6 @@
 package com.example.client_for_reddit
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.client_for_reddit.Model.RedditPost
@@ -26,23 +25,22 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val redditPosts = response.body()?.data?.children?.map { child ->
                         RedditPost(
-                            author = child.data.author,
+                            author = child.data.subreddit_name_prefixed,
+                            decription = child.data.title,
                             date = child.data.created_utc,
                             img = child.data.url,
                             countComments = child.data.num_comments
                         )
                     }
 
-                    val titles = redditPosts?.map { it.author } ?: listOf()
-
-                    val adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_list_item_1, titles)
-                    val listView = findViewById<ListView>(R.id.listView);
+                    val adapter = RedditPostAdapter(this@MainActivity, redditPosts ?: listOf())
+                    val listView = findViewById<ListView>(R.id.listView); listView.adapter = adapter
                     listView.adapter = adapter
                 }
             }
 
             override fun onFailure(call: Call<RedditResponse>, t: Throwable) {
-                println("Error: ${t.message}")
+                TODO("Not yet implemented")
             }
         })
     }
