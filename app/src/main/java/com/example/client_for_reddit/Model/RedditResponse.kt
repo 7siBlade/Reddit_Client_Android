@@ -17,5 +17,8 @@ data class RedditPostData(
     val title: String,
     val created_utc: Long,
     val url: String?,
-    val num_comments: Int
+    val num_comments: Int,
+    val is_video: Boolean,
+    val scrubber_media_url: String?,
+    val thumbnail: String?
 )
