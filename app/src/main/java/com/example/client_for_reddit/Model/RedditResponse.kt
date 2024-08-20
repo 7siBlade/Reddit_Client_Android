@@ -1,6 +1,8 @@
 package com.example.client_for_reddit.Model
 
-data class RedditResponse(
+import com.example.client_for_reddit.Network.RedditApiService
+
+class RedditResponse(
     val data: RedditData
 )
 
